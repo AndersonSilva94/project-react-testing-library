@@ -23,10 +23,19 @@ test('Se a página contém h2 com o texto About Pokedex', () => {
 });
 
 test('Se a página contém dois parágrafos', () => {
-  const { getAllByRole } = renderWithRouter(<About />);
+  const { getByText } = renderWithRouter(<About />);
 
-  const paragraphs = getAllByRole('paragraph');
-  expect(paragraphs.length).toBe(2);
+  const paragraph1 = getByText('This application simulates a Pokédex, '
+  + 'a digital encyclopedia containing all Pokémons');
+
+  expect(paragraph1).toBeInTheDocument();
+
+  const paragraph2 = getByText('One can filter Pokémons by type, '
+  + 'and see more details for each one of them');
+
+  expect(paragraph2).toBeInTheDocument();
+  /* const paragraphs = getAllByRole('paragraph');
+  expect(paragraphs.length).toBe(2); */
 });
 
 test('Se a página contém uma imagem', () => {
