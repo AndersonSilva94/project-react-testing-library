@@ -10,9 +10,9 @@ test('Se a página contém um h2 com o texto Page requested not found 😭', () 
 });
 
 test('Se a página contém uma imagem', () => {
-  const { getByRole } = renderWithRouter(<NotFound />);
+  const { getAllByRole } = renderWithRouter(<NotFound />);
 
   const imgNotFound = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
-  const imgPokeNotFound = getByRole('img', { name: imgNotFound });
-  expect(imgPokeNotFound).toBeInTheDocument();
+  const imgPokeNotFound = getAllByRole('img');
+  expect(imgPokeNotFound[1].src).toBe(imgNotFound);
 });
