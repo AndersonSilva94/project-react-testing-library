@@ -1,36 +1,26 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../RenderWithRouter';
 
+// Aqui troquei o MemoryRouter por RenderWithRouter para ficar padronizado
 test('renders a reading with the text `Pokédex`', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
+  const { getByText } = renderWithRouter(<App />);
+
   const heading = getByText(/Pokédex/i);
   expect(heading).toBeInTheDocument();
 });
 
 test('shows the Pokédex when the route is `/`', () => {
-  const { getByText } = render(
-    <MemoryRouter initialEntries={ ['/'] }>
-      <App />
-    </MemoryRouter>,
-  );
+  const { getByText, history } = renderWithRouter(<App />);
+  const { pathname } = history.location;
 
+  expect(pathname).toBe('/');
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
 });
 
 test('teste se há um menu fixo, com 3 links', () => {
-  const { getByRole } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
+  const { getByRole } = renderWithRouter(<App />);
 
   const navPoke = getByRole('navigation');
   expect(navPoke).toBeInTheDocument();

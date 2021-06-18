@@ -16,8 +16,6 @@ test('Se a página About foi renderizada', () => {
 test('Se a página contém h2 com o texto About Pokedex', () => {
   const { getByRole } = renderWithRouter(<About />);
 
-  // userEvent.click(getByRole('link', { name: /about/i }));
-
   const headingAbout = getByRole('heading', { name: /about pokédex/i });
   expect(headingAbout).toBeInTheDocument();
 });
@@ -34,8 +32,6 @@ test('Se a página contém dois parágrafos', () => {
   + 'and see more details for each one of them');
 
   expect(paragraph2).toBeInTheDocument();
-  /* const paragraphs = getAllByRole('paragraph');
-  expect(paragraphs.length).toBe(2); */
 });
 
 test('Se a página contém uma imagem', () => {
